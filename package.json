@@ -1,5 +1,5 @@
 {
-  "name": "nocaptchaai-puppeteer",
+  "name": "@kiwitronn/nocaptchaai-puppeteer",
   "version": "2.0.1",
   "description": "Puppeteer package for NoCaptchaAI ⚡️",
   "main": "lib/index.js",
