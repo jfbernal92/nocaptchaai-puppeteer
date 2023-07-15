@@ -1,5 +1,5 @@
 {
-  "name": "nocaptchaai-puppeteer",
+  "name": "@kiwitron/nocaptchaai-puppeteer",
   "version": "2.0.1",
   "description": "Puppeteer package for NoCaptchaAI ⚡️",
   "main": "lib/index.js",
@@ -25,12 +25,12 @@
   "homepage": "https://nocaptchaai.com",
   "repository": {
     "type": "git",
-    "url": "https:git@github.com:noCaptchaAi/nocaptchaai-puppeteer.git"
+    "url": "https:git@github.com:jfbernal92/nocaptchaai-puppeteer.git"
   },
   "bugs": {
-    "url": "https://github.com/noCaptchaAi/nocaptchaai-puppeteer/issues"
+    "url": "https://github.com/jfbernal92/nocaptchaai-puppeteer/issues"
   },
-  "author": "MohamadKh75",
+  "author": "jfbernal92",
   "license": "MIT",
   "keywords": [
     "puppeteer",
