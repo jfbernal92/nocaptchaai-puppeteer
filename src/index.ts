@@ -42,10 +42,9 @@ export const solveCaptcha = async (
   let skip = false;
   let target = '';
 
-
   try {
     do {
-      if (debug) console.log(`Current attempt: ${currentAttempt} / ${attemps}`)
+      if (debug) console.log(`Current attempt: ${currentAttempt} / ${attemps}`);
 
       let sitekey = await page.$eval('.h-captcha', el => el.getAttribute('data-sitekey'));
       if (!sitekey) sitekey = new URLSearchParams(innerFrame.url()).get('sitekey');
@@ -114,18 +113,21 @@ export const solveCaptcha = async (
           }
 
           case 'skip': {
-            if(debug) console.log('* Seems this a new challenge...');
+            if (debug) console.log('* Seems this a new challenge...');
             if (debug) console.log('Looking for a known challenge');
 
             let timeOut = false;
-            const timer: ReturnType<typeof setTimeout> = setTimeout(() => timeOut = true, attempsTimeout)
+            const timer: ReturnType<typeof setTimeout> = setTimeout(
+              () => (timeOut = true),
+              attempsTimeout
+            );
 
-            while (target == await getTarget(innerFrame)){
+            while (target == (await getTarget(innerFrame))) {
               const reloadButton = await innerFrame.$('.refresh.button');
               await reloadButton?.click();
               await sleep(1000);
               if (timeOut) throw new Error('Timeout looking for a new challenge');
-            } 
+            }
             skip = false;
             clearTimeout(timer);
             currentAttempt++;
@@ -150,17 +152,13 @@ export const solveCaptcha = async (
         await sleep(1000);
       }
 
-
       isSolved = (await outerFrame.$('#checkbox[aria-checked=true]')) !== null;
 
       if (debug && isSolved) console.log('* Puzzle solved');
-
     } while (currentAttempt <= attemps && !isSolved);
-
   } catch (err) {
     if (debug) console.error(err);
   }
 
   if (!isSolved) throw new Error('Captcha could not be solved');
-
 };
