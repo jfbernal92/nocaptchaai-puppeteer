@@ -43,7 +43,7 @@ export const solveCaptcha = async (
   let target = '';
 
   try {
-    do {
+    while (currentAttempt <= attemps && !isSolved) {
       if (debug) console.log(`Current attempt: ${currentAttempt} / ${attemps}`);
 
       let sitekey = await page.$eval('.h-captcha', el => el.getAttribute('data-sitekey'));
@@ -155,7 +155,7 @@ export const solveCaptcha = async (
       isSolved = (await outerFrame.$('#checkbox[aria-checked=true]')) !== null;
 
       if (debug && isSolved) console.log('* Puzzle solved');
-    } while (currentAttempt <= attemps && !isSolved);
+    }
   } catch (err) {
     if (debug) console.error(err);
   }
