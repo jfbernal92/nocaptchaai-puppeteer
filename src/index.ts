@@ -153,12 +153,14 @@ export const solveCaptcha = async (
       }
 
       isSolved = (await outerFrame.$('#checkbox[aria-checked=true]')) !== null;
-
-      if (debug && isSolved) console.log('* Puzzle solved');
     }
   } catch (err) {
-    if (debug) console.error(err);
+    isSolved = (await outerFrame.$('#checkbox[aria-checked=true]')) !== null;
+    if (!isSolved) {
+      if (debug) console.error(err);
+      throw new Error('Captcha could not be solved');
+    }
   }
 
-  if (!isSolved) throw new Error('Captcha could not be solved');
+  if (debug && isSolved) console.log('* Puzzle solved');
 };
